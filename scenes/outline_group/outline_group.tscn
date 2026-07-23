@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://kkktu8iixwif"]
+
+[ext_resource type="Script" uid="uid://cn4ysb7kfwuat" path="res://scenes/outline_group/outline_group.gd" id="1_d38dy"]
+[ext_resource type="Shader" uid="uid://bhy2bjfi5tg4a" path="res://shaders/outline.gdshader" id="1_vqdyl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_civ30"]
+resource_local_to_scene = true
+shader = ExtResource("1_vqdyl")
+shader_parameter/scale = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pallete_size = 0
+shader_parameter/circle_iterations = 16.0
+shader_parameter/line_iterations = 1.0
+
+[node name="OutlineGroup" type="CanvasGroup" unique_id=1650777818]
+material = SubResource("ShaderMaterial_civ30")
+script = ExtResource("1_d38dy")

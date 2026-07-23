@@ -11,13 +11,26 @@ config_version=5
 [application]
 
 config/name="CountDown"
+run/main_scene="uid://ctowjju8byvx6"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/integer_division=0
+
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[layer_names]
+
+2d_physics/layer_1="Cell"
+2d_physics/layer_2="Enemy"
 
 [physics]
 
@@ -26,3 +39,4 @@ window/stretch/aspect="expand"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.18431373, 0.18431373, 0.23137255, 1)

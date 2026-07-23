@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dcrgyq6ypqwfv"]
+
+[ext_resource type="Script" uid="uid://buqh6selhc7t6" path="res://scenes/bullet/bullet.gd" id="1_7c8un"]
+[ext_resource type="Shader" uid="uid://cfacpuxpk4q3" path="res://shaders/cell.gdshader" id="2_83itf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c6pnf"]
+resource_local_to_scene = true
+shader = ExtResource("2_83itf")
+shader_parameter/color = Color(0.9490196, 0.27450982, 0.07450981, 1)
+shader_parameter/amplitude = 0.05
+shader_parameter/frequency = 4.0
+shader_parameter/speed = 2.0
+shader_parameter/direction = 1.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="Gradient" id="Gradient_k5gl4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0vdx3"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_k5gl4")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7c8un"]
+radius = 32.0
+
+[node name="Bullet" type="Node2D" unique_id=1407765135]
+script = ExtResource("1_7c8un")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=927140997]
+material = SubResource("ShaderMaterial_c6pnf")
+texture = SubResource("GradientTexture2D_0vdx3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1332650780]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1548864759]
+shape = SubResource("CircleShape2D_7c8un")
+
+[node name="Timer" type="Timer" parent="." unique_id=853168789]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
