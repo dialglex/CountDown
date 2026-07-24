@@ -5,15 +5,14 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 
 const float thickness = 8.0;
 const float min_thickness = 2.0;
-uniform bool on = false;
 uniform float scale = 1.0;
 uniform vec3 color: source_color = vec3(1.0, 1.0, 1.0);
-uniform float circle_iterations = 16.0;
-uniform float line_iterations = 1.0;
+uniform float circle_iterations = 32.0;
+uniform float line_iterations = 8.0;
 
 void fragment() {
 	vec4 sprite_color = texture(screen_texture, SCREEN_UV);
-	if (!on || sprite_color.a == 1.0) {
+	if (sprite_color.a == 1.0) {
 		COLOR = sprite_color;
 	} else {
 		COLOR = vec4(0.0, 0.0, 0.0, 0.0);

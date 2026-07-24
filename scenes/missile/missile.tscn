@@ -1,14 +1,14 @@
-[gd_scene format=3 uid="uid://dcrgyq6ypqwfv"]
+[gd_scene format=3 uid="uid://colc6khmvsn5d"]
 
-[ext_resource type="Script" uid="uid://buqh6selhc7t6" path="res://scenes/bullet/bullet.gd" id="1_7c8un"]
-[ext_resource type="PackedScene" uid="uid://kkktu8iixwif" path="res://scenes/outline_group/outline_group.tscn" id="2_0vdx3"]
-[ext_resource type="Shader" uid="uid://cfacpuxpk4q3" path="res://shaders/cell.gdshader" id="2_83itf"]
-[ext_resource type="Shader" uid="uid://bhy2bjfi5tg4a" path="res://shaders/outline.gdshader" id="3_8g26r"]
-[ext_resource type="Texture2D" uid="uid://7u8ay3d24elf" path="res://assets/circle.png" id="5_8g26r"]
+[ext_resource type="Script" uid="uid://cgwte8rvl16sy" path="res://scenes/missile/missile.gd" id="1_w4tkk"]
+[ext_resource type="PackedScene" uid="uid://kkktu8iixwif" path="res://scenes/outline_group/outline_group.tscn" id="2_10qhc"]
+[ext_resource type="Shader" uid="uid://bhy2bjfi5tg4a" path="res://shaders/outline.gdshader" id="3_lll5s"]
+[ext_resource type="Texture2D" uid="uid://7u8ay3d24elf" path="res://assets/circle.png" id="4_3dim0"]
+[ext_resource type="Shader" uid="uid://cfacpuxpk4q3" path="res://shaders/cell.gdshader" id="5_at2p0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8g26r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j0ryr"]
 resource_local_to_scene = true
-shader = ExtResource("3_8g26r")
+shader = ExtResource("3_lll5s")
 shader_parameter/scale = 1.0
 shader_parameter/color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 shader_parameter/circle_iterations = 8.0
@@ -17,7 +17,7 @@ shader_parameter/line_iterations = 4.0
 [sub_resource type="Gradient" id="Gradient_8g26r"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.9882353, 0.8784314, 0.14117648, 1)
+colors = PackedColorArray(0.9843137, 0.69803923, 0.1254902, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ld051"]
 resource_local_to_scene = true
@@ -36,14 +36,16 @@ particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 8.0
 gravity = Vector3(0, 0, 0)
+scale_min = 0.32999998
+scale_max = 0.32999998
 scale_curve = SubResource("CurveTexture_755g1")
 color_ramp = SubResource("GradientTexture1D_ld051")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c6pnf"]
 resource_local_to_scene = true
-shader = ExtResource("2_83itf")
-shader_parameter/color = Color(0.9882353, 0.8784314, 0.14117648, 1)
-shader_parameter/nucleus_color = Color(0.9843137, 0.69803923, 0.1254902, 1)
+shader = ExtResource("5_at2p0")
+shader_parameter/color = Color(0.24313726, 0.2509804, 0.30980393, 1)
+shader_parameter/nucleus_color = Color(0.18431373, 0.18431373, 0.23137255, 1)
 shader_parameter/nucleus_size = 0.25
 shader_parameter/amplitude = 0.05
 shader_parameter/frequency = 4.0
@@ -64,18 +66,18 @@ height = 32
 [sub_resource type="CircleShape2D" id="CircleShape2D_7c8un"]
 radius = 24.0
 
-[node name="Bullet" type="Node2D" unique_id=1407765135]
+[node name="Missile" type="Node2D" unique_id=1407765135]
 z_index = -1
-script = ExtResource("1_7c8un")
+script = ExtResource("1_w4tkk")
 
-[node name="OutlineGroup" parent="." unique_id=1650777818 instance=ExtResource("2_0vdx3")]
-material = SubResource("ShaderMaterial_8g26r")
+[node name="OutlineGroup" parent="." unique_id=1650777818 instance=ExtResource("2_10qhc")]
+material = SubResource("ShaderMaterial_j0ryr")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="OutlineGroup" unique_id=446361670]
 unique_name_in_owner = true
 amount = 20
-texture = ExtResource("5_8g26r")
-lifetime = 0.09999999999999999
+texture = ExtResource("4_3dim0")
+lifetime = 0.06
 fixed_fps = 240
 visibility_rect = Rect2(-256, -256, 512, 512)
 process_material = SubResource("ParticleProcessMaterial_4ov8m")

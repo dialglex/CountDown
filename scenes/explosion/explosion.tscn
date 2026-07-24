@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://b5axixhah8oux"]
+
+[ext_resource type="Script" uid="uid://dqyyhebge12d0" path="res://scenes/explosion/explosion.gd" id="1_12s4q"]
+[ext_resource type="Shader" uid="uid://c0k0kgvfh038s" path="res://shaders/explosion.gdshader" id="1_plwnx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gpr35"]
+resource_local_to_scene = true
+shader = ExtResource("1_plwnx")
+shader_parameter/progress = 0.999999977648
+shader_parameter/color_1 = Color(0.9843137, 0.69803923, 0.1254902, 1)
+shader_parameter/color_2 = Color(0.9882353, 0.8784314, 0.14117648, 1)
+
+[sub_resource type="Gradient" id="Gradient_n5abw"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_igoca"]
+gradient = SubResource("Gradient_n5abw")
+width = 128
+height = 128
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8bf0"]
+radius = 1.0
+
+[node name="Explosion" type="Node2D" unique_id=662024231]
+script = ExtResource("1_12s4q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=481283218]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gpr35")
+texture = SubResource("GradientTexture2D_igoca")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=524086608]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=149999364]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_i8bf0")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

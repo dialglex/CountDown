@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dx00g6ab6hq3k"]
+
+[ext_resource type="Texture2D" uid="uid://7u8ay3d24elf" path="res://assets/circle.png" id="1_ta4s3"]
+[ext_resource type="Script" uid="uid://y7a8jdown0gu" path="res://scenes/particle/cell_particle.gd" id="2_2ruyw"]
+
+[sub_resource type="Gradient" id="Gradient_2ruyw"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2ruyw"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_2ruyw")
+
+[sub_resource type="Curve" id="Curve_bmi11"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.794117, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_755g1"]
+curve = SubResource("Curve_bmi11")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4ov8m"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 100.00001
+damping_max = 100.00001
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_755g1")
+color_ramp = SubResource("GradientTexture1D_2ruyw")
+
+[node name="CellParticle" type="GPUParticles2D" unique_id=686995793]
+emitting = false
+amount = 10
+texture = ExtResource("1_ta4s3")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+visibility_rect = Rect2(-256, -256, 512, 512)
+process_material = SubResource("ParticleProcessMaterial_4ov8m")
+script = ExtResource("2_2ruyw")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MutationStats" format=3 uid="uid://ctqno04yhs8xc"]
+
+[ext_resource type="PackedScene" uid="uid://tbcp8xthogli" path="res://scenes/cell/mutation/shooter_mutation.tscn" id="1_x4etf"]
+[ext_resource type="Script" uid="uid://ckiqfvi50mf7x" path="res://objects/mutation/mutation_stats.gd" id="2_g0rmp"]
+
+[resource]
+script = ExtResource("2_g0rmp")
+id = 2
+scene = ExtResource("1_x4etf")
+possible_mutations = Array[int]([0, 1, 2])
+color = Color(0.9843137, 0.69803923, 0.1254902, 1)
+nucleus_color = Color(0.972549, 0.5019608, 0.09803922, 1)
+display_name = "Shooter"
+description = "shoots stuff"
+cooldown = 3.0
+metadata/_custom_type_script = "uid://ckiqfvi50mf7x"

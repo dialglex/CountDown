@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://tbcp8xthogli"]
+
+[ext_resource type="Script" uid="uid://vjp0fgjeqpuo" path="res://scenes/cell/mutation/shooter_mutation.gd" id="1_wnxei"]
+[ext_resource type="PackedScene" uid="uid://sr6kxwk8rf7x" path="res://scenes/cell/mutation/shoot_component/shoot_component.tscn" id="2_0a4mb"]
+
+[node name="ShooterMutation" type="Node2D" unique_id=2024831892]
+script = ExtResource("1_wnxei")
+
+[node name="ShootComponent" parent="." unique_id=1061575045 instance=ExtResource("2_0a4mb")]
+
+[node name="Timer" type="Timer" parent="." unique_id=144546907]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

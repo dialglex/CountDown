@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b1ogqoo0frbd4"]
+
+[ext_resource type="Script" uid="uid://dwn81rf4bsmjs" path="res://scenes/cell/mutation/default_mutation.gd" id="1_d4exc"]
+
+[node name="DefaultMutation" type="Node2D" unique_id=1066347783]
+script = ExtResource("1_d4exc")

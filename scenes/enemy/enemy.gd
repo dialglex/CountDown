@@ -3,8 +3,9 @@ extends RigidBody2D
 
 
 const _MIN_SIZE = 64.0
-const _VELOCITY = 100.0
+const _VELOCITY = 50.0
 var _size := 1
+var _food_scene := preload("res://scenes/food/food.tscn")
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _label: Label = $Label
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
@@ -19,10 +20,9 @@ func damage(amount: int) -> void:
 	_size -= amount
 	if _size <= 0:
 		queue_free()
-		Cell.food_amount += 1
-		var hud := get_tree().get_first_node_in_group("hud") as HUD
-		hud.set_food_amount(Cell.food_amount)
-		
+		var food := _food_scene.instantiate()
+		food.position = position
+		(get_tree().current_scene as World).add_food(food)
 	_update_size()
 
 

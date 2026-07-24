@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c7sjccjcefi6n"]
+
+[ext_resource type="Script" uid="uid://bf475fipxxw2y" path="res://scenes/cell/mutation/farmer_mutation.gd" id="1_ehebb"]
+
+[node name="FarmerMutation" type="Node" unique_id=33512013]
+script = ExtResource("1_ehebb")
+
+[node name="Timer" type="Timer" parent="." unique_id=1866307463]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [debug]
 
+settings/stdout/print_fps=true
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/integer_division=0
 
@@ -26,6 +27,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom_font="uid://52rm87e0vpgv"
 
 [layer_names]
 

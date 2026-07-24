@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://4wstsgp18vf4"]
+
+[ext_resource type="Script" uid="uid://1h0t87vg4a5f" path="res://scenes/food/food.gd" id="1_dkmuf"]
+[ext_resource type="Shader" uid="uid://cfacpuxpk4q3" path="res://shaders/cell.gdshader" id="3_icjja"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jfr0c"]
+resource_local_to_scene = true
+shader = ExtResource("3_icjja")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/nucleus_color = Color(0.85490197, 0.89411765, 0.9137255, 1)
+shader_parameter/nucleus_size = 0.2
+shader_parameter/amplitude = 0.05
+shader_parameter/frequency = 2.0
+shader_parameter/speed = 2.0
+shader_parameter/direction = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="Gradient" id="Gradient_k5gl4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8tbbm"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_k5gl4")
+
+[sub_resource type="Animation" id="Animation_dkmuf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4y3qy"]
+resource_name = "animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(0.25, 4, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.6, 1.6), Vector2(1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_lerp"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwqb0"]
+_data = {
+&"RESET": SubResource("Animation_dkmuf"),
+&"animation": SubResource("Animation_4y3qy")
+}
+
+[node name="Food" type="Node2D" unique_id=366131638]
+script = ExtResource("1_dkmuf")
+
+[node name="OutlineSprite" type="Sprite2D" parent="." unique_id=1493897732]
+material = SubResource("ShaderMaterial_jfr0c")
+texture = SubResource("GradientTexture2D_8tbbm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=444618471]
+libraries/ = SubResource("AnimationLibrary_wwqb0")
+autoplay = &"animation"

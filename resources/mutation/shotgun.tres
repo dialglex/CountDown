@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MutationStats" format=3 uid="uid://drxi4ohdp0cld"]
+
+[ext_resource type="PackedScene" uid="uid://boe5lcjoc3bt6" path="res://scenes/cell/mutation/shotgun_mutation.tscn" id="1_htn8g"]
+[ext_resource type="Script" uid="uid://ckiqfvi50mf7x" path="res://objects/mutation/mutation_stats.gd" id="2_vgffh"]
+
+[resource]
+script = ExtResource("2_vgffh")
+id = 3
+scene = ExtResource("1_htn8g")
+possible_mutations = Array[int]([0, 1, 2])
+color = Color(0.9098039, 0.52156866, 0.6666667, 1)
+nucleus_color = Color(0.7882353, 0.41960785, 0.67058825, 1)
+display_name = "Shotgun"
+description = "shoots 3 bullets"
+cooldown = 15.0
+metadata/_custom_type_script = "uid://ckiqfvi50mf7x"

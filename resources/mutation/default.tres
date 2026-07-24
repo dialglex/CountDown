@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MutationStats" format=3 uid="uid://cc3fpubcmdx52"]
+
+[ext_resource type="PackedScene" uid="uid://b1ogqoo0frbd4" path="res://scenes/cell/mutation/default_mutation.tscn" id="1_4vrx4"]
+[ext_resource type="Script" uid="uid://ckiqfvi50mf7x" path="res://objects/mutation/mutation_stats.gd" id="2_e3t6v"]
+
+[resource]
+script = ExtResource("2_e3t6v")
+id = 0
+scene = ExtResource("1_4vrx4")
+possible_mutations = Array[int]([0, 1, 2])
+color = Color(0.47058824, 0.88235295, 0.2, 1)
+nucleus_color = Color(0.25490198, 0.77254903, 0.19215687, 1)
+display_name = "Basic"
+description = "Deals damage on contact"
+cooldown = 1.0
+metadata/_custom_type_script = "uid://ckiqfvi50mf7x"

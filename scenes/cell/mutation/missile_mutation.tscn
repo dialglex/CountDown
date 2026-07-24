@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://8v65ln260m3c"]
+
+[ext_resource type="Script" uid="uid://lmpoymixapwq" path="res://scenes/cell/mutation/missile_mutation.gd" id="1_ttyb6"]
+
+[node name="MissileMutation" type="Node2D" unique_id=2024831892]
+script = ExtResource("1_ttyb6")
+
+[node name="Timer" type="Timer" parent="." unique_id=144546907]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

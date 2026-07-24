@@ -7,10 +7,9 @@
 resource_local_to_scene = true
 shader = ExtResource("1_vqdyl")
 shader_parameter/scale = 1.0
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/pallete_size = 0
-shader_parameter/circle_iterations = 16.0
-shader_parameter/line_iterations = 1.0
+shader_parameter/color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+shader_parameter/circle_iterations = 32.0
+shader_parameter/line_iterations = 8.0
 
 [node name="OutlineGroup" type="CanvasGroup" unique_id=1650777818]
 material = SubResource("ShaderMaterial_civ30")

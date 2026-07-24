@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://sr6kxwk8rf7x"]
+
+[ext_resource type="Script" uid="uid://c2b7tfn1f1vl7" path="res://scenes/cell/mutation/shoot_component/shoot_component.gd" id="1_jf66u"]
+
+[node name="ShootComponent" type="Node2D" unique_id=572750493]
+script = ExtResource("1_jf66u")
