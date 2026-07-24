@@ -2,8 +2,9 @@ class_name Cell
 extends RigidBody2D
 
 
-const _MIN_SIZE = 96.0
-const _ACCELERATION = 800.0
+const _MIN_SIZE = 64.0
+const _ACCELERATION = 1000.0
+const _PUSH_ACCELERATION = 1000000.0
 const _DIVIDE_VELOCITY = 400.0
 static var food_amount := 0
 var _cell_scene := preload("res://scenes/cell/cell.tscn")
@@ -11,10 +12,12 @@ var _bullet_scene := preload("res://scenes/bullet/bullet.tscn")
 var _size := 8
 var _hovered := false
 @onready var _outline_group: OutlineGroup = $OutlineGroup
-@onready var _sprite: Sprite2D = %Sprite2D
+@onready var _sprite: Sprite2D = $Sprite2D
 @onready var _label: Label = $Label
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var _force_shape: CollisionShape2D = %ForceShape
 @onready var _mouse_shape: CollisionShape2D = %MouseShape
+@onready var _force_area: Area2D = $ForceArea
 @onready var _enemy_area: Area2D = $EnemyArea
 
 
@@ -39,16 +42,21 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	apply_force(position.direction_to(Vector2(1920, 1080)/2)*_ACCELERATION)
+	#for cell: Cell in _force_area.get_overlapping_bodies():
+		#if cell == self:
+			#continue
+		#cell.apply_force(position.direction_to(cell.position)*_PUSH_ACCELERATION/(position.distance_squared_to(cell.position) - pow((_collision_shape.shape as CircleShape2D).radius, 2)))
 
 
 func _update_size() -> void:
 	if _size <= 0:
 		return
 	_label.text = str(_size)
-	(_sprite.texture as GradientTexture2D).width = round(_MIN_SIZE*sqrt(_size))
-	(_sprite.texture as GradientTexture2D).height = round(_MIN_SIZE*sqrt(_size))
-	(_collision_shape.shape as CircleShape2D).radius = (_MIN_SIZE/2.0)*sqrt(_size)*0.75
-	(_mouse_shape.shape as CircleShape2D).radius = (_MIN_SIZE/2.0)*sqrt(_size)*0.75
+	(_sprite.texture as GradientTexture2D).width = round(_MIN_SIZE*sqrt(_size)*1.25)
+	(_sprite.texture as GradientTexture2D).height = round(_MIN_SIZE*sqrt(_size)*1.25)
+	(_collision_shape.shape as CircleShape2D).radius = (_MIN_SIZE/2.0)*sqrt(_size)*1.0
+	(_force_shape.shape as CircleShape2D).radius = (_MIN_SIZE/2.0)*sqrt(_size)*1.0
+	(_mouse_shape.shape as CircleShape2D).radius = (_MIN_SIZE/2.0)*sqrt(_size)*1.0
 
 
 func _shoot() -> void:
@@ -82,8 +90,8 @@ func _divide() -> void:
 		cell_2.linear_velocity = Vector2.from_angle(angle)*_DIVIDE_VELOCITY
 		cell_1.position = position
 		cell_2.position = position
-		get_tree().current_scene.add_child(cell_1)
-		get_tree().current_scene.add_child(cell_2)
+		get_parent().add_child(cell_1)
+		get_parent().add_child(cell_2)
 	queue_free()
 
 
@@ -111,10 +119,10 @@ func _on_mouse_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: 
 func _on_area_2d_mouse_entered() -> void:
 	_hovered = true
 	_outline_group.set_on(true)
-	z_index = 1
+	_outline_group.visible = true
 
 
 func _on_mouse_area_mouse_exited() -> void:
 	_hovered = false
 	_outline_group.set_on(false)
-	z_index = 0
+	_outline_group.visible = false

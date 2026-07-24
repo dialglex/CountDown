@@ -2,6 +2,7 @@ extends Node
 
 
 var _enemy_scene := preload("res://scenes/enemy/enemy.tscn")
+@export var _outline_group: OutlineGroup
 
 
 func _on_timer_timeout() -> void:
@@ -11,4 +12,4 @@ func _on_timer_timeout() -> void:
 		if position.x < 0 or position.x > 1920 or position.y < 0 or position.y > 1080:
 			enemy.position = position
 			break
-	get_tree().current_scene.add_child(enemy)
+	_outline_group.add_child(enemy)

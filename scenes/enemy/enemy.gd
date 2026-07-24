@@ -2,9 +2,9 @@ class_name Enemy
 extends RigidBody2D
 
 
-const _MIN_SIZE = 128.0
+const _MIN_SIZE = 64.0
 const _VELOCITY = 100.0
-var _size := 2
+var _size := 1
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _label: Label = $Label
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D

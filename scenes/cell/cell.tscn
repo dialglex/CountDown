@@ -5,19 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://kkktu8iixwif" path="res://scenes/outline_group/outline_group.tscn" id="2_r0oyy"]
 [ext_resource type="Shader" uid="uid://bhy2bjfi5tg4a" path="res://shaders/outline.gdshader" id="3_4m6nx"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0oyy"]
-resource_local_to_scene = true
-shader = ExtResource("3_4m6nx")
-shader_parameter/on = false
-shader_parameter/scale = 1.0
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/circle_iterations = 16.0
-shader_parameter/line_iterations = 1.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1f7j7"]
 resource_local_to_scene = true
 shader = ExtResource("2_4gomg")
 shader_parameter/color = Color(0.47058824, 0.88235295, 0.2, 1)
+shader_parameter/nucleus_color = Color(0.25490198, 0.77254903, 0.19215687, 1)
+shader_parameter/inner_nucleus_color = Color(0.2, 0.64705884, 0.28235295, 1)
+shader_parameter/nucleus_size = 0.2
+shader_parameter/inner_nucleus_size = 0.05
 shader_parameter/amplitude = 0.05
 shader_parameter/frequency = 2.0
 shader_parameter/speed = 2.0
@@ -34,9 +29,21 @@ gradient = SubResource("Gradient_k5gl4")
 width = 128
 height = 128
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0oyy"]
+resource_local_to_scene = true
+shader = ExtResource("3_4m6nx")
+shader_parameter/on = true
+shader_parameter/scale = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/circle_iterations = 16.0
+shader_parameter/line_iterations = 1.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ov8m"]
 resource_local_to_scene = true
-radius = 64.0
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4m6nx"]
+radius = 1920.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_755g1"]
 resource_local_to_scene = true
@@ -49,15 +56,22 @@ radius = 1920.0
 gravity_scale = 0.0
 script = ExtResource("1_ct601")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=184309760]
+material = SubResource("ShaderMaterial_1f7j7")
+texture = SubResource("GradientTexture2D_4ov8m")
+
 [node name="OutlineGroup" parent="." unique_id=1650777818 instance=ExtResource("2_r0oyy")]
+visible = false
+z_index = 1
 material = SubResource("ShaderMaterial_r0oyy")
 
-[node name="Sprite2D" type="Sprite2D" parent="OutlineGroup" unique_id=1125899255]
-unique_name_in_owner = true
+[node name="OutlineSprite" type="Sprite2D" parent="OutlineGroup" unique_id=1125899255]
 material = SubResource("ShaderMaterial_1f7j7")
 texture = SubResource("GradientTexture2D_4ov8m")
 
 [node name="Label" type="Label" parent="." unique_id=1388204847]
+visible = false
+z_index = 2
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,6 +90,12 @@ vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=98995602]
 shape = SubResource("CircleShape2D_4ov8m")
+
+[node name="ForceArea" type="Area2D" parent="." unique_id=1690753863]
+
+[node name="ForceShape" type="CollisionShape2D" parent="ForceArea" unique_id=323398016]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_4m6nx")
 
 [node name="MouseArea" type="Area2D" parent="." unique_id=1563189773]
 collision_mask = 0

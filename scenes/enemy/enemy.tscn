@@ -7,8 +7,12 @@
 resource_local_to_scene = true
 shader = ExtResource("4_jpjgb")
 shader_parameter/color = Color(0.9490196, 0.27450982, 0.07450981, 1)
-shader_parameter/amplitude = 0.095
-shader_parameter/frequency = 9.13
+shader_parameter/nucleus_color = Color(0.8392157, 0.078431375, 0.101960786, 1)
+shader_parameter/inner_nucleus_color = Color(0.654902, 0.08627451, 0.1882353, 1)
+shader_parameter/nucleus_size = 0.2
+shader_parameter/inner_nucleus_size = 0.05
+shader_parameter/amplitude = 0.1
+shader_parameter/frequency = 8.0
 shader_parameter/speed = 2.0
 shader_parameter/direction = 1.0
 shader_parameter/seed = 0.0
@@ -41,6 +45,7 @@ material = SubResource("ShaderMaterial_1f7j7")
 texture = SubResource("GradientTexture2D_4ov8m")
 
 [node name="Label" type="Label" parent="." unique_id=1388204847]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,6 +67,7 @@ visible = false
 shape = SubResource("CircleShape2D_4ov8m")
 
 [node name="CellArea" type="Area2D" parent="." unique_id=1436374196]
+visible = false
 collision_layer = 0
 
 [node name="CellShape" type="CollisionShape2D" parent="CellArea" unique_id=970590321]

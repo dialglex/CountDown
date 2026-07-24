@@ -2,6 +2,10 @@ shader_type canvas_item;
 
 
 uniform vec3 color: source_color = vec3(1.0, 1.0, 1.0);
+uniform vec3 nucleus_color: source_color = vec3(1.0, 1.0, 1.0);
+uniform vec3 inner_nucleus_color: source_color = vec3(1.0, 1.0, 1.0);
+uniform float nucleus_size = 0.25;
+uniform float inner_nucleus_size = 0.1;
 uniform float amplitude = 0.05;
 uniform float frequency = 4.0;
 uniform float speed = 2.0;
@@ -35,9 +39,14 @@ void fragment() {
 	if (a < -PI + edge_smoothing || a > PI - edge_smoothing) {
 		n = mix(0.5, n, (PI - abs(a))/edge_smoothing);
 	}
-	d += (2.0*n - 1.0)*amplitude;
-	d = clamp(d, 0.0, 1.0);
-	if (d < size) {
+	float cell_d = clamp(d + (2.0*n - 1.0)*amplitude, 0.0, 1.0);
+	float nucleus_d = clamp(d + (2.0*n - 1.0)*amplitude*2.0*nucleus_size, 0.0, 1.0);
+	float inner_nucleus_d = clamp(d + (2.0*n - 1.0)*amplitude*2.0*inner_nucleus_size, 0.0, 1.0);
+	if (inner_nucleus_d < inner_nucleus_size) {
+		COLOR = vec4(inner_nucleus_color, 1.0);
+	} else if (nucleus_d < nucleus_size) {
+		COLOR = vec4(nucleus_color, 1.0);
+	} else if (cell_d < size) {
 		COLOR = vec4(color, 1.0);
 	} else {
 		COLOR = vec4(0.0, 0.0, 0.0, 0.0);

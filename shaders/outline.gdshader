@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
-const float thickness = 16.0;
+const float thickness = 8.0;
 const float min_thickness = 2.0;
 uniform bool on = false;
 uniform float scale = 1.0;
